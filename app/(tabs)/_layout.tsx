@@ -1,44 +1,82 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import * as Device from 'expo-device';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+        screenOptions={{
+            tabBarActiveTintColor: '#333',
+            tabBarInactiveTintColor: '#A8B9C9',	
+            tabBarShowLabel: false,
+            animation: 'shift',
+            tabBarStyle: { 
+              position: 'absolute', 
+              backgroundColor: '#FFF',
+              height: Device.osName === 'iOS' ? 80 : 70
+            }  
         }}
+    >
+      <Tabs.Screen 
+        name="index"     
+        options={{
+            tabBarIconStyle: {
+              marginTop: 10
+            },
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
+            ),
+            headerShown: false
+          }}
+        />
+      <Tabs.Screen 
+        name="search" 
+        options={{
+            tabBarIconStyle: {
+              marginTop: 10
+            },
+            tabBarIcon: ({ color, focused }) => (
+                <Ionicons name={focused ? 'search-sharp' : 'search-outline'} color={color} size={24} />
+            ),
+            headerShown: false
+        }}  
       />
-      <Tabs.Screen
-        name="explore"
+      <Tabs.Screen 
+        name="bookmark"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
+            tabBarIconStyle: {
+              marginTop: 10
+            },
+            tabBarIcon: ({ color, focused }) => (
+                <Ionicons name={focused ? 'bookmarks-sharp' : 'bookmarks-outline'} color={color} size={24} />
+            ),
+            headerShown: false
+        }}  
+      />
+		<Tabs.Screen 
+			name="activity"  
+			options={{
+            tabBarIconStyle: {
+              marginTop: 10
+            },
+            tabBarIcon: ({ color, focused }) => (
+                <Ionicons name={focused ? 'flash-sharp' : 'flash-outline'} color={color} size={24} />
+            ),
+            headerShown: false
+        }}  
+      />
+      <Tabs.Screen 
+			name="account"   
+			options={{
+            tabBarIconStyle: {
+              marginTop: 10
+            },
+            tabBarIcon: ({ color, focused }) => (
+                <Ionicons name={focused ? 'person-sharp' : 'person-outline'} color={color} size={24} />
+            ),
+            headerShown: false
+        }}  
       />
     </Tabs>
   );
