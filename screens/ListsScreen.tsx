@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 export const ListsScreen = () => {
     return(
         <View>
-            <Text>review screen</Text>
+            <Text>LISTS list here we go</Text>
         </View>
     )
 }

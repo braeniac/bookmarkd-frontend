@@ -1,25 +1,33 @@
 
 import {View, Text, TouchableOpacity, StyleSheet, Platform} from 'react-native';
 
+type TabType = "books" | "reviews" | "lists"; 
 
-export const CustomTab = () => {
+interface CustomTabProps {
+    activeTab : TabType, 
+    handleTabPress: (tab: TabType) => void
+}
+
+export const CustomTab = ({ activeTab, handleTabPress} : CustomTabProps) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity
-                style={[styles.button, ]}
-                onPress={() => console.log('hello')}
+                style={[styles.button, activeTab === "books" && styles.activeButton]}
+                onPress={() => handleTabPress("books")}
             >
                 <Text style={styles.text}>Books</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={styles.button}
+                style={[styles.button, activeTab === "reviews" && styles.activeButton]}
+                onPress={() => handleTabPress("reviews")}
             >
                 <Text style={styles.text}>Reviews</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={styles.button}
+                style={[styles.button, activeTab === "lists" && styles.activeButton]}
+                onPress={() => handleTabPress("lists")}
             >
                 <Text style={styles.text}>Lists</Text>
             </TouchableOpacity>
@@ -34,10 +42,15 @@ const styles = StyleSheet.create({
       flexDirection: "row"
     },
     button: {
-        padding: 10,
-        backgroundColor: "#000"
+        backgroundColor: "#000",
+        width: 100
+    },
+    activeButton: {
+        backgroundColor: "#333",
     },
     text: {
+        textAlign: "center",
+        padding: 10,
         fontSize: 16,
         fontWeight: "bold",
         color: "#FFF"

@@ -6,12 +6,19 @@ import { BooksScreen } from '@/screens/BooksScreen';
 import { ReviewsScreen } from '@/screens/ReviewsScreen';
 import { ListsScreen } from '@/screens/ListsScreen';
 
+
+type TabType = "books" | "reviews" | "lists"; 
+
 //components
 import { CustomTab } from '@/component/home/custom-tab';
 
 export default function Index() {
 
-  const [activeTab, setActiveTab] = useState("books");
+  const [activeTab, setActiveTab] = useState<TabType>("books");
+
+  const handleTabPress = (tab: TabType) => {
+    setActiveTab(tab); 
+  }
 
   const renderScreen = () => {
     switch(activeTab) {
@@ -29,7 +36,7 @@ export default function Index() {
     <View style={styles.container}>
 
       <View> 
-        <CustomTab />
+        <CustomTab activeTab={activeTab} handleTabPress={handleTabPress}/>
      
         <View> { renderScreen() } </View>
       </View>
