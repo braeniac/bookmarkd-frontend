@@ -1,5 +1,5 @@
-
 import {View, Text, TouchableOpacity, StyleSheet, Platform} from 'react-native';
+import * as Haptics from 'expo-haptics';
 
 type TabType = "books" | "reviews" | "lists"; 
 
@@ -13,21 +13,30 @@ export const CustomTab = ({ activeTab, handleTabPress} : CustomTabProps) => {
         <View style={styles.container}>
             <TouchableOpacity
                 style={[styles.button, activeTab === "books" && styles.activeButton]}
-                onPress={() => handleTabPress("books")}
+                onPress={() => {
+                    handleTabPress("books")
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+                }}
             >
                 <Text style={styles.text}>Books</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
                 style={[styles.button, activeTab === "reviews" && styles.activeButton]}
-                onPress={() => handleTabPress("reviews")}
+                onPress={() => {
+                    handleTabPress("reviews")
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+                }}
             >
                 <Text style={styles.text}>Reviews</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
                 style={[styles.button, activeTab === "lists" && styles.activeButton]}
-                onPress={() => handleTabPress("lists")}
+                onPress={() => {
+                    handleTabPress("lists")
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+                }}
             >
                 <Text style={styles.text}>Lists</Text>
             </TouchableOpacity>
